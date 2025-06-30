@@ -48,18 +48,18 @@ const LoginPage = () => {
 
             {currState ==="Sign up" && !isDataSubmitted &&(
                 <input onChange={(e)=> setFullName(e.target.value)} value={fullName}
-                    type="text"  className='p-2 border border-gray-500 rounded-md focus:outline-none' placeholder='Full Name' required/>
+                    type="text"  className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400' placeholder='Full Name' required/>
             )}
 
             {!isDataSubmitted && (
                 <>
                     <input onChange={(e)=> setEmail(e.target.value)} value={email}
                         type="email" placeholder='Email Address' required
-                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' />
+                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400' />
 
                     <input onChange={(e)=> setPassword(e.target.value)} value={password}
                         type="password" placeholder='Password' required
-                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' />
+                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400' />
 
                 </>
             )}
@@ -67,7 +67,7 @@ const LoginPage = () => {
             {
                 currState === "Sign up" && isDataSubmitted &&(
                     <textarea onChange={(e)=> setBio(e.target.value)} value={bio}
-                    rows={4} className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'
+                    rows={4} className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400'
                     placeholder='Enter your Bio' required></textarea>
                 )
             }
@@ -83,11 +83,11 @@ const LoginPage = () => {
 
             <div className='felx flex-col gap-2'>
                 {currState === "Sign up" ? (
-                    <p className='text-sm text-gray-50'>Already have an Account? <span 
+                    <p className='text-sm '>Already have an Account? <span 
                         onClick={()=>{setCurrState("Login"); setIsDataSubmitted(false)}}
-                        className='font-medium text-violet-500 cursor-pointer'>Login here</span></p>
+                        className='font-bold text-violet-600 cursor-pointer'>Login here</span></p>
                 ) : (
-                    <p className='text-sm text-gray-50'>Create an Account <span 
+                    <p className='text-sm'>Create an Account <span 
                         onClick={()=> setCurrState("Sign up")}
                         className='font-medium text-violet-500 cursor-pointer'>Click here</span></p>
                 )}

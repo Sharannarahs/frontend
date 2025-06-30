@@ -34,7 +34,7 @@ const Sidebar = () => {
                     <div className='absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-[#282142] border border-gray-600 text-gray-100 hidden group-hover:block'>
                         <p onClick={()=> navigate('/profile')} className='cursor-pointer text-sm'>Edit Profile</p>
                         <hr className='my-2 border-t border-gray-500'/>
-                        <p onClick={()=> logout()} className='cursor-pointer text-sm'>Logout</p>
+                        <p onClick={()=> logout()} className='cursor-pointer text-red-400 text-sm'>Logout</p>
                     </div>
                 </div>
 
@@ -61,11 +61,12 @@ const Sidebar = () => {
                     }
 
                 </div>
-                {(unseenMessages?.[user._id] || 0) > 0 && (
+                {unseenMessages?.[user._id] > 0 &&
                     <p className='absolute top-4 right-4 text-xs h-5 w-5 flex justify-center items-center rounded-full bg-green-500/90'>
                     {unseenMessages[user._id]}
                     </p>
-                 )}
+            }
+
 
             </div>
         ))}

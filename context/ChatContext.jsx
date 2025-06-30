@@ -60,27 +60,30 @@ export const ChatProvider = ({ children })=>{
 
     // FUNCTION TO SUBSCRIBE TO MESSAGES FOR SELECTED USERS
     const subscribeToMessages = async () => {
-        if(!socket) return;
+    if (!socket) return;
 
-        socket.on("newMessages", (newMessage)=>{
-            if(selectedUser && newMessage.senderId === selectedUser._id){
-                newMessage.seen = true;
-                setMessages((prevMessages)=> [...prevMessages, newMessage]);
-                axios.put(`/api/messages/mark/${newMessage._id}`);
-            } else {
-                setUnseenMessages((prevUnseenMessages)=>({
-                    ...prevUnseenMessages, [newMessage.senderId] :
-                    prevUnseenMessages[newMessage.senderId] ? prevUnseenMessages
-                    [newMessage.senderId] + 1 : 1
-                }))
-            }
-        })
+    socket.on("newMessages", (newMessage) => {
+        if (selectedUser && newMessage.senderId === selectedUser._id) {
+            newMessage.seen = true;
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+            axios.put(`/api/messages/mark/${newMessage._id}`);
+        } else {
+            setUnseenMessages((prev) => {
+                const updated = {
+                    ...prev,
+                    [newMessage.senderId]: (prev[newMessage.senderId] || 0) + 1
+                };
+                console.log("🔔 Updated unseenMessages:", updated);
+                return updated;
+            });
+        }
+    });
+};
 
-    }
 
     // FUNCTION TO UNSUBSCRIBE FROMMESSAGES
     const unsubscribeFromMessages = ()=>{
-        if(socket) socket.off("newMessage");
+        if(socket) socket.off("newMessages");
     }
 
     useEffect(()=>{

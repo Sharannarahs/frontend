@@ -3,6 +3,7 @@ import assets from '../assets/assets'
 import { formateMessageTime } from '../lib/utils'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
+import toast from 'react-hot-toast'
 
 const ChatContainer = () => {
 
@@ -24,20 +25,24 @@ const ChatContainer = () => {
     }
 
     // HANDLE SENDING AN IMAGE
-    const handleSendImage = async(e) =>{
-        const file = e.target.files[0];
-        if(!file || !file.type.startsWith("image/")){
-          toast.error("Select an image file");
-          return;
-        }
-        const reader = new FileReader();
 
-        reader.onloadend = async ()=>{
-          await sendMessage({image: reader.result})
-          e.target.value = ""
-        }
-        reader.readAsDataURL(file)
+    const handleSendImage = async (e) => {
+      const file = e.target.files[0];
+      if(!file || !file.type.startsWith("image/")){
+        toast.error("Select an image file");
+        return;
+      }
+      const reader = new FileReader();
+
+      reader.onloadend = async () => {
+        await sendMessage({image: reader.result})
+        e.target.value = "";
+      }
+      reader.readAsDataURL(file);
     }
+
+  
+
 
     useEffect(()=>{
       if(selectedUser){
@@ -59,13 +64,11 @@ const ChatContainer = () => {
     <div className='h-full overflow-scroll relative backdrop-blur-lg ml-3 pl-3'>
       {/* -------- header ------- */}
       <div className=' flex items-center gap-3 py-4 border-b border-stone-500 mr-2'>
-        <img src={selectedUser.profilePic || assets.ava} alt="logo" className='w-8 rounded-full' />
+        <img src={selectedUser.profilePic || assets.avatar_icon} alt="logo" className='w-8 rounded-full' />
         <p className='flex-1 text-lg text-white flex items-center gap-2'>
           {selectedUser.fullName}
-          {onlineUsers.includes(selectedUser._id) && (
-            <span className='w-2 h-2 rounded-full bg-green-500'></span>
-)}
-
+          {onlineUsers.includes(selectedUser._id) && 
+            <span className='w-2 h-2 rounded-full bg-green-500'></span>}
         </p>
         <img onClick={() => setSelectedUser(null)} src={assets.arrow_icon} alt="App Logo" className='md:hidden max-w-7' />
         <img src={assets.help_icon} alt="App Logo" className='max-md:hidden max-w-5' />
