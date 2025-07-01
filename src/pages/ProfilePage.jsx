@@ -77,10 +77,10 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className='min-h-screen bg-cover bg-no-repeat flex items-center justify-center'>
-            <div className='w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 flex items-center justify-between max-sm:flex-col-reverse rounded-lg'>
+        <div className='w-screen h-screen bg-cover bg-no-repeat flex items-center justify-center'>
+            <div className='w-screen h-screen backdrop-blur-2xl bg-black/30 text-gray-300 border border-gray-600 flex items-center justify-between max-sm:flex-col-reverse'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-5 p-10 flex-1'>
-                    <h3 className='text-lg'>Profile Details</h3>
+                    <h3 className='ml-20 text-lg'>Profile Details</h3>
 
                     <label htmlFor='avatar' className='flex items-center gap-3 cursor-pointer'>
                         <input 
@@ -93,7 +93,7 @@ const ProfilePage = () => {
                         <img 
                             src={selectedImg ? URL.createObjectURL(selectedImg) : assets.avatar_icon} 
                             alt="Profile Preview" 
-                            className={`w-12 h-12 ${selectedImg && 'rounded-full'}`} 
+                            className={`ml-20 w-12 h-12 ${selectedImg && 'rounded-full'}`} 
                         />
                         Upload profile image
                     </label>
@@ -104,7 +104,7 @@ const ProfilePage = () => {
                         type="text" 
                         required 
                         placeholder='Your Name' 
-                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500' 
+                        className='ml-20 w-100 p-2 border-2 border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400' 
                     />
 
 
@@ -113,20 +113,20 @@ const ProfilePage = () => {
                         value={bio}
                         placeholder='Write profile bio' 
                         required 
-                        className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500' 
+                        className='ml-20 w-100 p-2 border-2 border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400' 
                         rows={4}
                     ></textarea>
 
                     <button 
                         type='submit' 
-                        className='bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer'
+                        className='ml-20 w-100 bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer border-2'
                     >
                         Save
                     </button>
                 </form>
 
                 <img 
-                    className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && 'rounded-full'}`} 
+                    className={`mr-60 max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && 'rounded-full'}`} 
                     src={authUser?.profilePic || assets.logo1} 
                     alt="User Preview" 
                 />
