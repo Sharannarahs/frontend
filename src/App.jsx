@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     //Background imag is displayed on entire app, therefore add in app.jsx
-    <div className="bg-[url('./src/assets/bgImage2.png')] bg-center">
+    <div className="bg-[url('/bgImage2.png')] bg-center">
       
       <Toaster />
       <Routes>
